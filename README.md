@@ -28,8 +28,15 @@ This is a simple Node.js boilerplate using Express.js and EJS templating, ideal 
 1. Clone the repository:
 
 ```bash
-git clone https://github.com/tdanko128/node_js_web_app_template.git
-cd node_js_web_app_template
+git clone https://github.com/tdanko128/node_js_web_app_template.git my-new-app
+cd my-new-app
+
+# Remove the original GitHub remote
+git remote remove origin
+
+# Create a new repo: https://github.com/new
+git remote add origin https://github.com/yourusername/my-new-app.git
+git push -u origin master
 ```
 
 2. Install dependencies:
@@ -116,27 +123,4 @@ your-app-name/
 └── README.md
 ```
 
----
 
-## 🧬 Creating a New Project from This Boilerplate
-
-There are two options depending on whether you're using a local copy or a GitHub template:
-
-### 🌐 Clone from GitHub Template
-
-If you've already published this boilerplate to GitHub (e.g., as `template-web-app`):
-
-```bash
-# Clone the template
-git clone https://github.com/tdanko128/node_js_web_app_template.git my-new-app
-cd my-new-app
-
-# Remove the original GitHub remote
-git remote remove origin
-
-# Create a new repo: https://github.com/new
-git remote add origin https://github.com/yourusername/my-new-app.git
-git push -u origin master
-```
-
-Now your new app is connected to its own GitHub repo and ready to develop.
