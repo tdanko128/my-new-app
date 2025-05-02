@@ -11,6 +11,9 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      UserChoreInstance.belongsTo(models.User, { foreignKey: 'userId' });
+      UserChoreInstance.belongsTo(models.ChoreInstance, { foreignKey: 'choreInstanceId' });
+
     }
   }
   UserChoreInstance.init({
