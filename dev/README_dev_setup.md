@@ -64,7 +64,14 @@ DB_DIALECT=postgres
     GRANT ALL PRIVILEGES ON DATABASE chore_tracker TO chore_user;
     ```
 
-2. Optional: allow connections in `pg_hba.conf` and set `listen_addresses = '*'` in `postgresql.conf`.
+2. Update permissions on chore_tracker
+    ```sql
+    GRANT ALL ON SCHEMA public TO chore_user;
+    ALTER DEFAULT PRIVILEGES IN SCHEMA public GRANT ALL ON TABLES TO chore_user;
+    ```
+
+3. Optional: allow connections in `pg_hba.conf` and set `listen_addresses = '*'` in `postgresql.conf`.
+
 
 ---
 

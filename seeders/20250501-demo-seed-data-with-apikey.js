@@ -20,11 +20,16 @@ module.exports = {
       { name: 'Ice Cream Trip', description: 'Go out for ice cream', cost: 15, createdAt: new Date(), updatedAt: new Date() },
       { name: 'Movie Night', description: 'Pick a movie and snacks', cost: 20, createdAt: new Date(), updatedAt: new Date() }
     ], {});
+
+    await queryInterface.bulkInsert('ApiKeys', [
+      { key: 'ad558dda17774d166cb6d4806e73ce68746dde8e8eafbf3531306875f3b848ff', description: 'Default key for Parent One', lastUsedAt: null, userId: 1, createdAt: new Date(), updatedAt: new Date() }
+    ], {})
   },
 
   down: async (queryInterface, Sequelize) => {
-    await queryInterface.bulkDelete('Users', null, {});
-    await queryInterface.bulkDelete('Chores', null, {});
+    await queryInterface.bulkDelete('ApiKeys', null, {});
     await queryInterface.bulkDelete('Rewards', null, {});
+    await queryInterface.bulkDelete('Chores', null, {});
+    await queryInterface.bulkDelete('Users', null, {});
   }
 };
