@@ -1,4 +1,4 @@
-const { ChoreLog, User } = require('../models');
+const { ChoreLog, Chore, User } = require('../models');
 const { Op } = require('sequelize');
 
 // GET /api/chores/:choreId/logs?startDate=YYYY-MM-DD&endDate=YYYY-MM-DD
@@ -31,8 +31,7 @@ exports.getChoreLogs = async (req, res) => {
     }
   };
 
-  const { ChoreLog, Chore } = require('../models');
-const { Op } = require('sequelize');
+
 
 // GET /api/chores/logs/user/:userId?startDate=&endDate=
 exports.getLogsByUser = async (req, res) => {
@@ -64,7 +63,7 @@ exports.getLogsByUser = async (req, res) => {
   }
 };
 
-const { ChoreLog, Chore, User } = require('../models');
+
 
 // POST /api/chores/:choreId/logs
 exports.createChoreLog = async (req, res) => {
