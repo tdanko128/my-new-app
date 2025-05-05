@@ -13,8 +13,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', require('./routes/index'));
 
 // API Routes
-const authenticate_api_key = require('./middleware/authenticate_api_key');
-app.use('/api', authenticate_api_key, require('./routes/api'));
+// const authenticate_api_key = require('./middleware/authenticate_api_key');
+// app.use('/api', authenticate_api_key, require('./routes/api'));
 
 
 app.listen(port, () => {

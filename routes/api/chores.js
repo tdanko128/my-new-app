@@ -37,4 +37,7 @@ router.post('/:choreId/logs', choreLogsController.createChoreLog);
 // Get logs by user
 router.get('/logs/user/:userId', choreLogsController.getLogsByUser);
 
+// POST /api/chores/generate
+router.post('/generate', choreInstancesController.generateRecurringChores );
+
 module.exports = router;

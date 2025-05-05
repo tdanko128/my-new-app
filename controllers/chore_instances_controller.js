@@ -1,4 +1,5 @@
 const { Chore, ChoreInstance, UserChoreInstance, User } = require('../models');
+const { Op } = require('sequelize');
 
 // POST /api/chores/:choreId/instances
 exports.createInstance = async (req, res) => {
@@ -192,5 +193,52 @@ exports.markUserComplete = async (req, res) => {
   } catch (err) {
     console.error('Error marking chore complete:', err);
     res.status(500).json({ error: 'Failed to mark chore complete' });
+  }
+};
+
+
+
+
+exports.generateRecurringChores = async (req, res) => {
+  try {
+    const today = new Date();
+    const startOfDay = new Date(today.setHours(0, 0, 0, 0));
+    const endOfDay = new Date(today.setHours(23, 59, 59, 999));
+
+    // Get all recurring chores
+    const chores = await Chore.findAll({
+      where: {
+        frequency: {
+          [Op.in]: ['daily', 'weekly']
+        }
+      }
+    });
+
+    let createdCount = 0;
+
+    for (const chore of chores) {
+      // Check if an instance already exists for today (can extend to weekly later)
+      const existingInstance = await ChoreInstance.findOne({
+        where: {
+          choreId: chore.id,
+          scheduledDate: {
+            [Op.between]: [startOfDay, endOfDay]
+          }
+        }
+      });
+
+      if (!existingInstance) {
+        await ChoreInstance.create({
+          choreId: chore.id,
+          scheduledDate: new Date()
+        });
+        createdCount++;
+      }
+    }
+
+    res.json({ message: `Created ${createdCount} new chore instance(s)` });
+  } catch (err) {
+    console.error('Error generating recurring chores:', err);
+    res.status(500).json({ error: 'Failed to generate chores' });
   }
 };
